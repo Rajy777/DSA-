@@ -41,6 +41,15 @@ void reverseDisplay(Node* head){
     reverseDisplay(head->next);
     cout<< head-> val << " ";
 }
+void inserAtEnd(Node* head, int val){
+    Node * t = new Node(val);
+    while(head->next != NULL){
+        head=head->next;
+
+    }
+    head->next = t; 
+}
+
 int main(){
     Node* a = new Node(10);
     Node* b = new Node(20);
@@ -54,7 +63,9 @@ int main(){
    cout<< endl;
    reverseDisplay(a);
    cout<< endl;
-   count(a);
+   count(a); 
    cout<< count(a) << endl;
+    inserAtEnd(a, 40);
+    display(a);
     return 0;
 }

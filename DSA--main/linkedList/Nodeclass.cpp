@@ -33,5 +33,5 @@ int main(){
     while(temp != NULL){
         cout<< temp->val << " ";
         temp = temp->next;
-    }
+    } 
     return 0;}
