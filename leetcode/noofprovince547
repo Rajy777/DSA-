@@ -1,0 +1,52 @@
+class Solution {
+public:
+    // BFS function to visit all cities connected to city i
+    void bfs(int &i, vector<bool>& vis, vector<vector<int>>& isConnected) {
+        // Mark the starting city as visited
+        vis[i] = true;
+
+        int n = isConnected.size();
+
+        // Queue for BFS traversal
+        queue<int> q;
+        q.push(i);
+
+        // Continue until all connected cities are visited
+        while (!q.empty()) {
+            int front = q.front();
+            q.pop();
+
+            // Check all cities connected to the current city
+            for (int j = 0; j < n; j++) {
+                // If there is a connection and the city is not visited
+                if (isConnected[front][j] == 1 && !vis[j]) {
+                    q.push(j);
+                    vis[j] = true;
+                }
+            }
+        }
+    }
+
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n = isConnected.size();
+
+        // Keeps track of visited cities
+        vector<bool> vis(n, false);
+
+        // Stores the number of provinces
+        int count = 0;
+
+        // Start BFS for every unvisited city
+        for (int i = 0; i < n; i++) {
+            if (!vis[i]) {
+                // Visit all cities in the current province
+                bfs(i, vis, isConnected);
+
+                // One complete province is found
+                count++;
+            }
+        }
+
+        return count;
+    }
+};
